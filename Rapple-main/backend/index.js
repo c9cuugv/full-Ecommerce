@@ -21,8 +21,15 @@ const enquiryRouter = require('./routes/enqRoute');
 const uploadRouter = require('./routes/uploadRoute');
 dbConnect();
 
+// CORS configuration
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
 app.use(morgan('dev'));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -41,7 +48,6 @@ app.use('/api/upload', uploadRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-console.log(PORT)
 app.listen(PORT, () => {
   console.log(`Server is running at PORT ${PORT}`);
 });

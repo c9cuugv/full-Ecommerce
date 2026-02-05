@@ -129,3 +129,22 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# IDE directories
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Security
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Uploaded files
+public/images/products/
+public/images/blogs/
+uploads/
