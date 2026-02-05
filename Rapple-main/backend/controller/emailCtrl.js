@@ -14,7 +14,7 @@ const sendEmail = asynHandler(async (data, req, res) => {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"Trendfy.com ☑️" <abc@gmail.com>', // sender address
+    from: `"${process.env.MAIL_FROM_NAME || 'Trendfy.com'} ☑️" <${process.env.MAIL_FROM_ADDRESS || process.env.MAIL_ID}>`, // sender address
     to: data.to, // list of receivers
     subject: data.subject, // Subject line
     text: data.text, // plain text body
@@ -25,7 +25,9 @@ const sendEmail = asynHandler(async (data, req, res) => {
   // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 
   // Preview only available when sending through an Ethereal account
-  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  if (process.env.NODE_ENV === 'development') {
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+  }
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 });
 

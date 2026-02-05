@@ -46,7 +46,7 @@ router.post('/order/checkout', authMiddleware, checkout);
 router.post('/order/paymentVerification', authMiddleware, paymentVerification);
 // router.post('/cart/applycoupon', authMiddleware, applyCoupon);
 router.post('/cart/create-order', authMiddleware, createOrder);
-router.get('/all-users', getAllUser);
+router.get('/all-users', authMiddleware, isAdmin, getAllUser);
 router.get('/getmyorders', authMiddleware, getMyOrders);
 router.get('/getallorders', authMiddleware, isAdmin, getAllOrders);
 router.get('/getaorder/:id', authMiddleware, isAdmin, getSingleOrder);
@@ -70,7 +70,7 @@ router.delete(
   authMiddleware,
   updateProductQuantityFromCart
 );
-router.delete('/:id', deleteaUser);
+router.delete('/:id', authMiddleware, isAdmin, deleteaUser);
 
 router.get('/:id', authMiddleware, isAdmin, getaUser);
 router.put('/edit-user', authMiddleware, updatedUser);
